@@ -23,11 +23,12 @@ const About: React.FC = () => {
   }, [inView, animationTriggered]);
 
   const stats = [
-    { number: '50+', text: 'Projects Completed' },
-    { number: '25+', text: 'Happy Clients' },
-    { number: '10+', text: 'Years Experience' },
+    { number: '20+', text: 'Projects Completed' },
+    { number: '5+', text: 'Happy Clients' },
+    { number: '2+', text: 'Years Experience' },
     { number: '15+', text: 'Technologies' },
-  ];
+  ];    
+  
 
   const values = [
     { 

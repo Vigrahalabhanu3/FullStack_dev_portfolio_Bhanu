@@ -66,8 +66,8 @@ const Home: React.FC = () => {
         <div className="relative">
           <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
             <img 
-              src="public\IMG-20250420-WA0092.jpg" 
-              alt="Alex Johnson" 
+              src="https://res.cloudinary.com/dzu7g2yts/image/upload/v1750672869/IMG-20250420-WA0092_euixwf.jpg" 
+              alt="Bhanu Prasad" 
               className="w-full h-full object-cover"
             />
           </div>
