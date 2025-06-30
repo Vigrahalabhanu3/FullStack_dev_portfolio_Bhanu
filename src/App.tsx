@@ -5,6 +5,7 @@ import About from './sections/About';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
+import Certifications from "./sections/Certifications";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
       <section id="projects" className="min-h-screen">
         <Projects />
       </section>
+      <section id="certifications" className="min-h-screen">
+        <Certifications />
+      </section>  
       <section id="contact" className="min-h-screen">
         <Contact />
       </section>

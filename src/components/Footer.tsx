@@ -3,32 +3,63 @@ import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h3 className="text-xl font-bold">Bhanu Prasad</h3>
-            <p className="text-gray-400 mt-1">Full-Stack Developer</p>
+    <footer className="bg-gradient-to-tr fixed-bottom from-gray-900 via-black to-gray-800 text-white py-12 mt-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Top Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Branding */}
+          <div>
+            <h3 className="text-2xl font-bold tracking-tight">Bhanu Prasad</h3>
+            <p className="text-gray-400 mt-2">🚀 Full-Stack Developer</p>
+            <p className="text-gray-500 text-sm mt-1">
+              Building responsive web apps & creative digital experiences.
+            </p>
           </div>
-          
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <Github className="h-5 w-5" />
+
+          {/* Socials */}
+          <div className="flex md:justify-end space-x-6">
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub"
+              className="group"
+            >
+              <Github className="h-6 w-6 text-gray-400 group-hover:text-white transition duration-300" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <Linkedin className="h-5 w-5" />
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn"
+              className="group"
+            >
+              <Linkedin className="h-6 w-6 text-gray-400 group-hover:text-white transition duration-300" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <Twitter className="h-5 w-5" />
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Twitter"
+              className="group"
+            >
+              <Twitter className="h-6 w-6 text-gray-400 group-hover:text-white transition duration-300" />
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <Mail className="h-5 w-5" />
+            <a
+              href="mailto:you@example.com"
+              title="Mail"
+              className="group"
+            >
+              <Mail className="h-6 w-6 text-gray-400 group-hover:text-white transition duration-300" />
             </a>
           </div>
         </div>
-        
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-          <p>© {new Date().getFullYear()} Bhanu Prasad. All rights reserved.</p>
+
+        {/* Divider & Copyright */}
+        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+          <p>
+            © {new Date().getFullYear()} <span className="text-white">Bhanu Prasad</span> — All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
