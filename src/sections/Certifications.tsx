@@ -10,18 +10,18 @@ const certifications = [
         link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751294750/Screenshot_2025-06-30_201451_svxc91.png",
     },
     {
-        title: "Full Stack Dev",
-        provider: "Coursera",
-        year: "2023",
-        image: "/certs/fullstack.png",
-        link: "https://example.com/cert/fullstack",
+        title: "SQL",
+        provider: "NXTwave",
+        year: "2024",
+        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751296180/Screenshot_2025-03-19_223342_wld48c.png",
+        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751296180/Screenshot_2025-03-19_223342_wld48c.png",
     },
     {
-        title: "Python for ML",
-        provider: "IBM",
+        title: "Build Your Own Responsive Website",
+        provider: "NXTwave",
         year: "2024",
-        image: "/certs/python.png",
-        link: "https://example.com/cert/python",
+        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
+        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
     },
 ];
 
