@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, time } from "framer-motion";
+import { title } from "framer-motion/client";
 
 const certifications = [
     {
@@ -10,6 +11,20 @@ const certifications = [
         link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751294750/Screenshot_2025-06-30_201451_svxc91.png",
     },
     {
+        title: "Build Your Own Responsive Website",
+        provider: "NXTwave",
+        year: "2024",
+        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
+        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
+    },
+    {
+        title: "Build Your Own Dynamic Web Application",
+        provider: "NXTwave",
+        year: "2025",
+        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1771222364/WhatsApp_Image_2026-02-16_at_11.41.49_lz6wo0.jpg",
+        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1771222364/WhatsApp_Image_2026-02-16_at_11.41.49_lz6wo0.jpg",
+    },
+    {
         title: "SQL",
         provider: "NXTwave",
         year: "2024",
@@ -17,11 +32,11 @@ const certifications = [
         link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751296180/Screenshot_2025-03-19_223342_wld48c.png",
     },
     {
-        title: "Build Your Own Responsive Website",
+        title: "Programming Foundations",
         provider: "NXTwave",
-        year: "2024",
-        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
-        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/v1751297209/Screenshot_2025-03-20_100324_k1osrm.png",
+        year: "2025",
+        image: "https://res.cloudinary.com/dzu7g2yts/image/upload/e_background_removal/c_crop,ar_4:3,f_png/v1771221576/Screenshot_2026-02-16_at_11.28.15_AM_o0pgxm.png",
+        link: "https://res.cloudinary.com/dzu7g2yts/image/upload/e_background_removal/c_crop,ar_4:3,f_png/v1771221576/Screenshot_2026-02-16_at_11.28.15_AM_o0pgxm.png",
     },
 ];
 

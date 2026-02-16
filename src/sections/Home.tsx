@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter, Download } from 'lucide-react';
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
         </h2>
         <p className="text-gray-600 mb-8 leading-relaxed stagger-item">
           I craft exceptional digital experiences with clean, efficient code.
-          Specializing in creating responsive web applications that deliver 
+          Specializing in creating responsive web applications that deliver
           both functionality and beauty.
         </p>
         <div className="flex flex-wrap gap-4 mb-8 stagger-item">
@@ -37,24 +37,32 @@ const Home: React.FC = () => {
           <a href="#contact" className="outline-button">
             Get in Touch
           </a>
+          <a
+            href="/resume.pdf"
+            download="Bhanu_Prasad_Resume.pdf"
+            className="blue-button flex items-center gap-2"
+          >
+            <Download className="h-5 w-5" />
+            Download Resume
+          </a>
         </div>
         <div className="flex gap-5 stagger-item">
-          <a 
-            href="#" 
+          <a
+            href="https://github.com/Vigrahalabhanu3"
             className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
             aria-label="GitHub"
           >
             <Github className="h-6 w-6" />
           </a>
-          <a 
-            href="#" 
+          <a
+            href="https://www.linkedin.com/in/bhanu-prasad-848003289"
             className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
             aria-label="LinkedIn"
           >
             <Linkedin className="h-6 w-6" />
           </a>
-          <a 
-            href="#" 
+          <a
+            href="https://x.com/bhanu7671988410"
             className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
             aria-label="Twitter"
           >
@@ -65,9 +73,9 @@ const Home: React.FC = () => {
       <div className="md:w-1/2 flex justify-center stagger-item">
         <div className="relative">
           <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
-            <img 
-              src="https://res.cloudinary.com/dzu7g2yts/image/upload/v1750672869/IMG-20250420-WA0092_euixwf.jpg" 
-              alt="Bhanu Prasad" 
+            <img
+              src="https://res.cloudinary.com/dzu7g2yts/image/upload/v1769582764/53c68e46-6eae-45e6-bf9e-ea7a673a5dbb_tyulyb.jpg"
+              alt="Bhanu Prasad"
               className="w-full h-full object-cover"
             />
           </div>
