@@ -38,8 +38,8 @@ const Home: React.FC = () => {
             Get in Touch
           </a>
           <a
-            href="/resume.pdf"
-            download="Bhanu_Prasad_Resume.pdf"
+            href="https://res.cloudinary.com/dzu7g2yts/image/upload/v1771223385/BHANU_PRASAD_2026-02-02-175605_ancggf.pdf"
+            download="https://res.cloudinary.com/dzu7g2yts/image/upload/v1771223385/BHANU_PRASAD_2026-02-02-175605_ancggf.pdf"
             className="blue-button flex items-center gap-2"
           >
             <Download className="h-5 w-5" />
