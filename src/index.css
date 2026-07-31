@@ -41,11 +41,23 @@ section {
 }
 
 .project-card {
-  @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1;
+  @apply overflow-hidden rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/50;
+}
+
+.cert-card {
+  @apply overflow-hidden rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-emerald-200/50;
+}
+
+.skill-card {
+  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/50;
+}
+
+.contact-card {
+  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/40;
 }
 
 .contact-input {
-  @apply w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  @apply w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm transition duration-300 placeholder:text-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
 .nav-link {

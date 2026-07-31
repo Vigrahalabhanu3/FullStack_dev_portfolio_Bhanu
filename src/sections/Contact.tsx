@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionTitle from '../components/SectionTitle';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, MapPin, Phone, Send, Twitter } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-
-// Import emailjs
 
 const SERVICE_ID = 'service_86238my';
 const TEMPLATE_ID = 'template_vgryewi';
@@ -17,21 +16,25 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  const [animationTriggered, setAnimationTriggered] = useState(false);
   const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (status !== 'idle') {
+      setStatus('idle');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
+    setStatus('idle');
     try {
       await emailjs.send(
         SERVICE_ID,
@@ -44,25 +47,13 @@ const Contact: React.FC = () => {
         },
         USER_ID
       );
-      alert('Thank you for your message! I will get back to you soon.');
+      setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
-      alert('Sorry, something went wrong. Please try again later.');
+    } catch {
+      setStatus('error');
     }
     setSending(false);
   };
-
-  useEffect(() => {
-    if (inView && !animationTriggered) {
-      setAnimationTriggered(true);
-      const items = document.querySelectorAll('.contact-item');
-      items.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add('fade-in-up');
-        }, 150 * index);
-      });
-    }
-  }, [inView, animationTriggered]);
 
   const contactInfo = [
     { 
@@ -85,6 +76,30 @@ const Contact: React.FC = () => {
     }
   ];
 
+  const socials = [
+    {
+      label: 'GitHub',
+      href: 'https://github.com/Vigrahalabhanu3',
+      icon: Github,
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/bhanu-prasad-848003289',
+      icon: Linkedin,
+    },
+    {
+      label: 'Twitter',
+      href: 'https://x.com/bhanu7671988410',
+      icon: Twitter,
+    },
+  ];
+
+  const fields = [
+    { id: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
+    { id: 'email', label: 'Email', type: 'email', placeholder: 'Your email address' },
+    { id: 'subject', label: 'Subject', type: 'text', placeholder: 'Subject of your message' },
+  ];
+
   return (
     <div className="section-container" ref={ref}>
       <SectionTitle 
@@ -93,53 +108,55 @@ const Contact: React.FC = () => {
         subtitle="Have a project in mind or just want to say hello? I'd love to hear from you."
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="contact-item opacity-0">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <motion.div
+          className="contact-card p-6 md:p-8"
+          initial={{ opacity: 0, y: 34, scale: 0.97 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="mb-7">
+            <p className="mb-2 inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">
+              <Send className="h-4 w-4" />
+              Start a conversation
+            </p>
+            <h3 className="text-2xl font-bold text-slate-900">Send me a message</h3>
+          </div>
+
           <form onSubmit={handleSubmit}>
-            <div className="mb-6">
-              <label htmlFor="name" className="block text-gray-700 mb-2">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="contact-input"
-                placeholder="Your name"
-              />
+            <div className="grid gap-5 md:grid-cols-2">
+              {fields.map((field, index) => (
+                <motion.div
+                  key={field.id}
+                  className={field.id === 'subject' ? 'md:col-span-2' : ''}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: index * 0.08 + 0.12, duration: 0.45 }}
+                >
+                  <label htmlFor={field.id} className="mb-2 block font-semibold text-gray-700">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    value={formData[field.id as keyof typeof formData]}
+                    onChange={handleChange}
+                    required
+                    className="contact-input"
+                    placeholder={field.placeholder}
+                  />
+                </motion.div>
+              ))}
             </div>
             
-            <div className="mb-6">
-              <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="contact-input"
-                placeholder="Your email address"
-              /> 
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="subject" className="block text-gray-700 mb-2">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="contact-input"
-                placeholder="Subject of your message"
-              />
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="message" className="block text-gray-700 mb-2">Message</label>
+            <motion.div
+              className="mt-5"
+              initial={{ opacity: 0, y: 18 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.36, duration: 0.45 }}
+            >
+              <label htmlFor="message" className="mb-2 block font-semibold text-gray-700">Message</label>
               <textarea
                 id="message"
                 name="message"
@@ -150,64 +167,103 @@ const Contact: React.FC = () => {
                 className="contact-input"
                 placeholder="Your message"
               ></textarea>
-            </div>
+            </motion.div>
+
+            {status !== 'idle' && (
+              <motion.p
+                className={`mt-5 rounded-md px-4 py-3 text-sm font-semibold ${
+                  status === 'success'
+                    ? 'bg-emerald-50 text-emerald-700'
+                    : 'bg-red-50 text-red-700'
+                }`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                {status === 'success'
+                  ? 'Thank you for your message. I will get back to you soon.'
+                  : 'Sorry, something went wrong. Please try again later.'}
+              </motion.p>
+            )}
             
-            <button type="submit" className="blue-button w-full" disabled={sending}>
-              {sending ? 'Sending...' : 'Send Message'}
-            </button>
+            <motion.button
+              type="submit"
+              className="blue-button group relative mt-6 inline-flex w-full items-center justify-center gap-2 overflow-hidden disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={sending}
+              whileHover={!sending ? { y: -4, boxShadow: '0 18px 34px rgba(37, 99, 235, 0.26)' } : {}}
+              whileTap={!sending ? { scale: 0.97 } : {}}
+            >
+              <motion.span
+                className="absolute inset-y-0 -left-10 w-10 rotate-12 bg-white/45 blur-sm"
+                initial={{ x: '-140%', opacity: 0 }}
+                whileHover={!sending ? { x: '140%', opacity: [0, 0.55, 0] } : {}}
+                transition={{ duration: 0.72, ease: 'easeOut' }}
+              />
+              <span className="relative z-10">{sending ? 'Sending...' : 'Send Message'}</span>
+              <motion.span
+                className="relative z-10"
+                animate={sending ? { x: [0, 5, 0] } : {}}
+                transition={{ duration: 0.8, repeat: sending ? Infinity : 0 }}
+              >
+                <ArrowRight className="h-5 w-5" />
+              </motion.span>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
         
-        <div className="contact-item opacity-0 lg:pl-8">
-          <div className="bg-white rounded-xl shadow-md p-8 h-full">
-            <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+        <motion.div
+          className="lg:pl-4"
+          initial={{ opacity: 0, y: 34, scale: 0.97 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ delay: 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="contact-card relative h-full overflow-hidden p-6 md:p-8">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-50" />
+            <h3 className="relative mb-6 text-2xl font-bold text-slate-900">Contact Information</h3>
             
-            <div className="space-y-6 mb-8">
+            <div className="relative mb-8 space-y-5">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start">
-                  <div className="p-2 bg-blue-50 rounded-full mr-4">{info.icon}</div>
-                  <div>
-                    <h4 className="font-medium text-gray-900">{info.title}</h4>
+                <motion.div
+                  key={info.title}
+                  className="group flex items-start rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-colors duration-300 hover:border-blue-100 hover:bg-blue-50/40"
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: index * 0.08 + 0.24, duration: 0.45 }}
+                  whileHover={{ x: 4 }}
+                >
+                  <div className="mr-4 rounded-md bg-blue-50 p-3 transition-colors duration-300 group-hover:bg-white">{info.icon}</div>
+                  <div className="min-w-0">
+                    <h4 className="font-semibold text-gray-900">{info.title}</h4>
                     {info.link ? (
-                      <a href={info.link} className="text-gray-600 hover:text-blue-600">
+                      <a href={info.link} className="break-words text-gray-600 hover:text-blue-600">
                         {info.content}
                       </a>
                     ) : (
                       <p className="text-gray-600">{info.content}</p>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
             
-            <div>
-              <h4 className="font-medium text-gray-900 mb-4">Follow Me</h4>
-              <div className="flex space-x-5">
-                <a 
-                  href="https://github.com/Vigrahalabhanu3" 
-                  className="p-2 bg-blue-50 rounded-full text-blue-700 hover:bg-blue-100 transition-colors duration-700"
-                  aria-label="GitHub"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-                <a 
-                  href="https://www.linkedin.com/in/bhanu-prasad-848003289" 
-                  className="p-2 bg-blue-50 rounded-full text-blue-600 hover:bg-blue-100 transition-colors duration-300"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a 
-                  href="https://x.com/bhanu7671988410" 
-                  className="p-2 bg-blue-50 rounded-full text-blue-600 hover:bg-blue-100 transition-colors duration-300"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
+            <div className="relative">
+              <h4 className="mb-4 font-semibold text-gray-900">Follow Me</h4>
+              <div className="flex gap-4">
+                {socials.map(({ label, href, icon: Icon }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    className="flex h-11 w-11 items-center justify-center rounded-md border border-blue-100 bg-blue-50 text-blue-700 transition-colors duration-300 hover:bg-white"
+                    aria-label={label}
+                    whileHover={{ y: -4, rotate: 3 }}
+                    whileTap={{ scale: 0.92 }}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </motion.a>
+                ))}
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
