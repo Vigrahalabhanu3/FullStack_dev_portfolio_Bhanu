@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, Code } from 'lucide-react';
+import { Code, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
@@ -25,6 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
     { name: 'Certifications', href: '#certifications' },
+    { name: 'Progress', href: '#progress' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -51,13 +52,13 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               >
                 <Code className="h-6 w-6" />
               </motion.span>
-              <span className="ml-2 text-xl font-bold text-gray-900">Portfolio</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">Bhanu</span>
             </motion.a>
           </div>
 
           {/* Desktop menu */}
           <div className="hidden md:block">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               {navLinks.map(link => {
                 const isActive = activeSection === link.href.substring(1);
 
@@ -65,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    className={`nav-link relative overflow-hidden ${isActive ? 'active' : ''}`}
+                    className={`nav-link relative inline-flex items-center gap-1 overflow-hidden ${isActive ? 'active' : ''}`}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.94 }}
                   >
@@ -159,7 +160,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                         transition={{ type: 'spring', stiffness: 450, damping: 35 }}
                       />
                     )}
-                    <span className="relative z-10">{link.name}</span>
+                    <span className="relative z-10 inline-flex items-center gap-2">
+                      {link.name}
+                    </span>
                   </motion.a>
                 );
               })}

@@ -5,6 +5,7 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import Certifications from "./sections/Certifications";
+import Progress from './sections/Progress';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
       </section>
       <section id="certifications" className="min-h-screen">
         <Certifications />
+      </section>
+      <section id="progress" className="min-h-screen">
+        <Progress />
       </section>
       <section id="contact" className="min-h-screen">
         <Contact />
