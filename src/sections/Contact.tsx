@@ -108,7 +108,7 @@ const Contact: React.FC = () => {
         subtitle="Have a project in mind or just want to say hello? I'd love to hear from you."
       />
       
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         <motion.div
           className="contact-card p-6 md:p-8"
           initial={{ opacity: 0, y: 34, scale: 0.97 }}

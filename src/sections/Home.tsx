@@ -94,7 +94,7 @@ const socials = [
 
 const Home: React.FC = () => {
   return (
-    <div className="section-container relative flex min-h-[calc(100vh-10rem)] flex-col items-center justify-center gap-12 overflow-hidden md:flex-row md:justify-between">
+    <div className="section-container relative flex min-h-[calc(100vh-8rem)] flex-col items-center justify-center gap-10 overflow-hidden md:min-h-[calc(100vh-10rem)] md:flex-row md:justify-between md:gap-12">
       <motion.div
         className="pointer-events-none absolute left-6 top-24 h-24 w-24 rounded-full border border-blue-100"
         animate={{ y: [0, -12, 0], scale: [1, 1.05, 1] }}
@@ -122,12 +122,12 @@ const Home: React.FC = () => {
 
         <motion.h1
           variants={fadeUp}
-          className="mb-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl lg:text-6xl"
+          className="mb-4 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Bhanu Prasad Vigrahala
         </motion.h1>
 
-        <motion.h2 variants={fadeUp} className="mb-6 text-2xl font-semibold text-gray-700 md:text-3xl">
+        <motion.h2 variants={fadeUp} className="mb-6 text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl">
           Full-Stack Developer
         </motion.h2>
 
@@ -224,7 +224,7 @@ const Home: React.FC = () => {
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl shadow-blue-200/60 md:h-80 md:w-80"
+            className="relative h-56 w-56 overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl shadow-blue-200/60 sm:h-64 sm:w-64 md:h-80 md:w-80"
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 220, damping: 18 }}
           >

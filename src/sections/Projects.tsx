@@ -136,7 +136,7 @@ const Projects: React.FC = () => {
         </div>
       </div>
       
-      <motion.div layout className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+      <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (
             <motion.article
@@ -153,7 +153,7 @@ const Projects: React.FC = () => {
               whileHover={{ y: -10 }}
               className="project-card group"
             >
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-48 overflow-hidden sm:h-56">
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -184,7 +184,7 @@ const Projects: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex min-h-[284px] flex-col p-6">
+              <div className="flex min-h-[250px] flex-col p-5 sm:min-h-[284px] sm:p-6">
                 <div className="mb-4">
                   <h3 className="mb-2 text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-700">
                     {project.title}

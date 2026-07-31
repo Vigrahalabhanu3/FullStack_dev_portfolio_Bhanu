@@ -58,7 +58,7 @@ const About: React.FC = () => {
         subtitle="Passionate developer dedicated to crafting beautiful and functional digital experiences"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+      <div className="grid grid-cols-1 gap-8 mt-10 lg:grid-cols-2 lg:gap-12 lg:mt-12">
         <motion.div
           className="about-card p-6 md:p-8"
           variants={fadeUp}
@@ -108,7 +108,7 @@ const About: React.FC = () => {
             <motion.img 
               src="https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
               alt="Workspace with laptops" 
-              className="w-full h-[320px] object-cover rounded-md"
+              className="w-full h-56 object-cover rounded-md sm:h-72 md:h-[320px]"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             />
@@ -116,7 +116,7 @@ const About: React.FC = () => {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 my-16">
+      <div className="grid grid-cols-1 gap-4 my-12 sm:grid-cols-2 md:grid-cols-4 md:gap-6 md:my-16">
         {stats.map((stat, index) => (
           <motion.div 
             key={stat.text} 
@@ -138,7 +138,7 @@ const About: React.FC = () => {
         transition={{ delay: 0.24, duration: 0.5 }}
       >
         <h3 className="text-2xl font-bold mb-6 text-center text-slate-900">What Drives Me</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {values.map((value, index) => (
             <motion.div
               key={value.title}

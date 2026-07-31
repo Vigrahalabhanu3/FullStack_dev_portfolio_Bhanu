@@ -186,7 +186,7 @@ export default function Certifications() {
 
             <motion.div
                 layout
-                className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3"
+                className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7"
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
             >
@@ -204,7 +204,7 @@ export default function Certifications() {
                             className="cert-card group cursor-pointer"
                             layout
                         >
-                            <div className="relative h-52 overflow-hidden bg-slate-100">
+                            <div className="relative h-44 overflow-hidden bg-slate-100 sm:h-52">
                                 <motion.img
                                     src={cert.image}
                                     alt={cert.title}
@@ -227,7 +227,7 @@ export default function Certifications() {
                                 </div>
                             </div>
 
-                            <div className="flex min-h-[196px] flex-col p-6">
+                            <div className="flex min-h-[180px] flex-col p-5 sm:min-h-[196px] sm:p-6">
                                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-700 ring-1 ring-blue-100">
                                     <Award className="h-5 w-5" />
                                 </div>
@@ -287,7 +287,7 @@ export default function Certifications() {
                                     <motion.img
                                         src={selectedCert.image}
                                         alt={selectedCert.title}
-                                        className="h-[360px] w-full rounded-md object-contain"
+                                        className="h-60 w-full rounded-md object-contain sm:h-80 md:h-[360px]"
                                         initial={{ opacity: 0, scale: 0.9, filter: "blur(6px)" }}
                                         animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                                         exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}

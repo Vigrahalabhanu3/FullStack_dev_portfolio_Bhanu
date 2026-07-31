@@ -57,8 +57,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-2">
+          <div className="hidden lg:block">
+            <div className="flex items-center space-x-1 xl:space-x-2">
               {navLinks.map(link => {
                 const isActive = activeSection === link.href.substring(1);
 
@@ -92,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-600 shadow-sm hover:text-blue-600 focus:outline-none"
@@ -119,7 +119,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-white shadow-lg"
+            className="lg:hidden bg-white shadow-lg"
             initial={{ opacity: 0, height: 0, y: -8 }}
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -8 }}

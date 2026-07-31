@@ -5,6 +5,7 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  overflow-x: hidden;
 }
 
 section {
@@ -13,7 +14,7 @@ section {
 }
 
 .section-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20;
 }
 
 .blue-gradient-text {
@@ -99,4 +100,15 @@ section {
 
 .animate-stagger {
   animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  section {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
 }
