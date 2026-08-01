@@ -29,6 +29,21 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     { name: 'Contact', href: '#contact' }
   ];
 
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    setIsOpen(false);
+
+    const target = document.querySelector<HTMLElement>(href);
+
+    if (target) {
+      const navbarOffset = window.innerWidth < 1024 ? 72 : 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - navbarOffset;
+
+      window.history.pushState(null, '', href);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -42,6 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           <div className="flex items-center">
             <motion.a
               href="#home"
+              onClick={(event) => handleNavClick(event, '#home')}
               className="flex items-center"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
@@ -66,6 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <motion.a
                     key={link.name}
                     href={link.href}
+                    onClick={(event) => handleNavClick(event, link.href)}
                     className={`nav-link relative inline-flex items-center gap-1 overflow-hidden ${isActive ? 'active' : ''}`}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.94 }}
@@ -141,7 +158,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(event) => handleNavClick(event, link.href)}
                     className={`relative block overflow-hidden rounded-md px-3 py-2 text-base font-medium ${
                       isActive
                         ? 'text-blue-600'
