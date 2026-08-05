@@ -27,11 +27,11 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured online store with secure payment processing and inventory management.',
+      title: 'Milk Production Tracker',
+      description: 'A dairy management app for tracking daily milk production, farmer records, and collection reports.',
       image: 'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'web',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      technologies: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
       githubUrl: '#',
       liveUrl: '#',
       featured: true
