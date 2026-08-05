@@ -124,11 +124,11 @@ const Home: React.FC = () => {
           variants={fadeUp}
           className="mb-4 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl md:text-5xl lg:text-6xl"
         >
-          Bhanu Prasad Vigrahala .V
+          Bhanu Prasad Vigrahala
         </motion.h1>
 
         <motion.h2 variants={fadeUp} className="mb-6 text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl">
-          Full-Stack Developer
+          Web Developer
         </motion.h2>
 
         <motion.p variants={fadeUp} className="mb-8 max-w-xl leading-relaxed text-gray-600">
