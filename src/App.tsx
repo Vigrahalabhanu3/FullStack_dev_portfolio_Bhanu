@@ -3,9 +3,8 @@ import Home from './sections/Home';
 import About from './sections/About';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
+import Achievements from './sections/Achievements';
 import Contact from './sections/Contact';
-import Certifications from "./sections/Certifications";
-import Progress from './sections/Progress';
 
 function App() {
   return (
@@ -13,22 +12,19 @@ function App() {
       <section id="home" className="min-h-screen">
         <Home />
       </section>
-      <section id="about" className="min-h-screen">
+      <section id="about">
         <About />
       </section>
-      <section id="skills" className="min-h-screen">
+      <section id="skills" className="bg-slate-50/60">
         <Skills />
       </section>
-      <section id="projects" className="min-h-screen">
+      <section id="projects">
         <Projects />
       </section>
-      <section id="certifications" className="min-h-screen">
-        <Certifications />
+      <section id="achievements" className="bg-slate-50/60">
+        <Achievements />
       </section>
-      <section id="progress" className="min-h-screen">
-        <Progress />
-      </section>
-      <section id="contact" className="min-h-screen">
+      <section id="contact">
         <Contact />
       </section>
     </Layout>

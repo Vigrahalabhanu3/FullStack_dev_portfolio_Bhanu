@@ -2,162 +2,86 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionTitle from '../components/SectionTitle';
-import {
-  BrainCircuit, CheckCircle, Code2, Database, Layers, PenTool, Sparkles
-} from 'lucide-react';
 
 interface Skill {
   name: string;
-  icon: React.ReactNode;
+  level: 'Expert' | 'Proficient' | 'Learning';
+  category: 'frontend' | 'backend' | 'tools' | 'ai';
   percentage: number;
-  category: string;
 }
+
+const skills: Skill[] = [
+  // Frontend
+  { name: 'React.js', level: 'Expert', category: 'frontend', percentage: 92 },
+  { name: 'JavaScript (ES6+)', level: 'Expert', category: 'frontend', percentage: 90 },
+  { name: 'HTML & CSS', level: 'Expert', category: 'frontend', percentage: 95 },
+  { name: 'Tailwind CSS', level: 'Expert', category: 'frontend', percentage: 90 },
+  // Backend
+  { name: 'Node.js', level: 'Proficient', category: 'backend', percentage: 85 },
+  { name: 'Express.js', level: 'Proficient', category: 'backend', percentage: 85 },
+  { name: 'MongoDB', level: 'Proficient', category: 'backend', percentage: 82 },
+  { name: 'REST APIs', level: 'Proficient', category: 'backend', percentage: 88 },
+  { name: 'JWT Auth', level: 'Proficient', category: 'backend', percentage: 82 },
+  // Tools
+  { name: 'Git & GitHub', level: 'Proficient', category: 'tools', percentage: 88 },
+  { name: 'VS Code', level: 'Expert', category: 'tools', percentage: 95 },
+  { name: 'Postman', level: 'Proficient', category: 'tools', percentage: 82 },
+  // AI & APIs
+  { name: 'OpenAI API', level: 'Proficient', category: 'ai', percentage: 80 },
+  { name: 'Cloudinary', level: 'Proficient', category: 'ai', percentage: 78 },
+];
+
+const tabs = [
+  { id: 'all', label: 'All' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'tools', label: 'Tools' },
+  { id: 'ai', label: 'AI & APIs' },
+];
+
+const levelColor: Record<Skill['level'], string> = {
+  Expert: 'bg-emerald-50 text-emerald-700',
+  Proficient: 'bg-blue-50 text-blue-700',
+  Learning: 'bg-amber-50 text-amber-700',
+};
 
 const Skills: React.FC = () => {
   const [activeTab, setActiveTab] = useState('all');
-  const { ref, inView } = useInView({
-    threshold: 0.15,
-    triggerOnce: true,
-  });
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
-  const skills: Skill[] = [
-    {
-      name: 'React',
-      icon: <Code2 className="h-6 w-6 text-blue-600" />,
-      percentage: 100,
-      category: 'frontend'
-    },
-    {
-      name: 'TypeScript',
-      icon: <Code2 className="h-6 w-6 text-blue-600" />,
-      percentage: 90,
-      category: 'frontend'
-    },
-    {
-      name: 'Vue.js',
-      icon: <Code2 className="h-6 w-6 text-green-600" />,
-      percentage: 100,
-      category: 'frontend'
-    },
-    {
-      name: 'Node.js',
-      icon: <Layers className="h-6 w-6 text-green-600" />,
-      percentage: 92,
-      category: 'backend'
-    },
-    {
-      name: 'Python',
-      icon: <Layers className="h-6 w-6 text-blue-600" />,
-      percentage: 100,
-      category: 'backend'
-    },
-    {
-      name: 'PostgreSQL',
-      icon: <Database className="h-6 w-6 text-blue-600" />,
-      percentage: 85,
-      category: 'backend'
-    },
-    {
-      name: 'MongoDB',
-      icon: <Database className="h-6 w-6 text-green-600" />,
-      percentage: 80,
-      category: 'backend'
-    },
-    {
-      name: 'Git',
-      icon: <BrainCircuit className="h-6 w-6 text-orange-600" />,
-      percentage: 95,
-      category: 'tools'
-    },
-    {
-      name: 'Docker',
-      icon: <BrainCircuit className="h-6 w-6 text-blue-600" />,
-      percentage: 85,
-      category: 'tools'
-    },
-    {
-      name: 'Figma',
-      icon: <PenTool className="h-6 w-6 text-purple-600" />,
-      percentage: 50,
-      category: 'design'
-    },
-    {
-      name: 'Adobe XD',
-      icon: <PenTool className="h-6 w-6 text-pink-600" />,
-      percentage: 70,
-      category: 'design'
-    },
-    {
-      name: 'TailwindCSS',
-      icon: <Code2 className="h-6 w-6 text-teal-600" />,
-      percentage: 95,
-      category: 'frontend'
-    },
-  ];
-
-  const tabs = [
-    { id: 'all', label: 'All Skills' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'tools', label: 'Tools' },
-    { id: 'design', label: 'Design' },
-  ];
-
-  const filteredSkills = activeTab === 'all'
-    ? skills
-    : skills.filter(skill => skill.category === activeTab);
-
-  const categorySummary = [
-    { label: 'Frontend', value: skills.filter(skill => skill.category === 'frontend').length },
-    { label: 'Backend', value: skills.filter(skill => skill.category === 'backend').length },
-    { label: 'Tools', value: skills.filter(skill => skill.category === 'tools').length },
-    { label: 'Design', value: skills.filter(skill => skill.category === 'design').length },
-  ];
+  const filtered = activeTab === 'all' ? skills : skills.filter(s => s.category === activeTab);
 
   return (
-    <div className="section-container" ref={ref}>
+    <div className="section-container bg-slate-50/60" ref={ref}>
       <SectionTitle
-        title="My Skills"
+        title="Skills & Technologies"
         highlight="Skills"
-        subtitle="A comprehensive look at my technical expertise and the tools I use"
+        subtitle="The tools and technologies I use to build full-stack web applications"
       />
 
+      {/* Tab filter */}
       <motion.div
-        className="mx-auto mb-10 grid max-w-4xl grid-cols-2 overflow-hidden rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 md:grid-cols-4"
-        initial={{ opacity: 0, y: 24 }}
+        className="mb-10 flex justify-center"
+        initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.45 }}
       >
-        {categorySummary.map((item) => (
-          <div key={item.label} className="border-r border-b border-gray-100 p-4 text-center last:border-r-0 md:border-b-0">
-            <p className="text-2xl font-bold text-slate-950">{item.value}</p>
-            <p className="text-sm font-semibold text-gray-500">{item.label}</p>
-          </div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        className="mb-12 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.12, duration: 0.45 }}
-      >
-        <div className="inline-flex flex-wrap justify-center gap-1 rounded-lg border border-gray-200 bg-white p-1 shadow-sm">
+        <div className="inline-flex flex-wrap justify-center gap-1 rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative rounded-md px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+              className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-200 ${
                 activeTab === tab.id
                   ? 'text-white'
-                  : 'text-gray-600 hover:text-blue-600'
+                  : 'text-slate-600 hover:text-blue-600'
               }`}
             >
               {activeTab === tab.id && (
                 <motion.span
-                  layoutId="skill-tab-active"
-                  className="absolute inset-0 rounded-md bg-blue-600 shadow-md"
-                  transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                  layoutId="skill-tab"
+                  className="absolute inset-0 rounded-lg bg-blue-600"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
               <span className="relative z-10">{tab.label}</span>
@@ -166,65 +90,55 @@ const Skills: React.FC = () => {
         </div>
       </motion.div>
 
-      <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+      {/* Skills grid */}
+      <motion.div layout className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <AnimatePresence mode="popLayout">
-          {filteredSkills.map((skill, index) => (
-            <motion.article
-              layout
+          {filtered.map((skill, index) => (
+            <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 34, scale: 0.96 }}
+              layout
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              exit={{ opacity: 0, scale: 0.97 }}
               transition={{
-                duration: 0.5,
-                delay: inView ? index * 0.06 : 0,
+                duration: 0.4,
+                delay: inView ? index * 0.04 : 0,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              whileHover={{ y: -8 }}
-              className="skill-card group relative overflow-hidden p-6"
+              className="skill-card flex flex-col gap-3 p-5"
             >
-              <div className="absolute right-4 top-4 text-blue-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <Sparkles className="h-8 w-8" />
-              </div>
-
-              <div className="mb-6 flex items-start gap-4">
-                <motion.div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gray-50 ring-1 ring-gray-100 transition-colors duration-300 group-hover:bg-blue-50"
-                  whileHover={{ rotate: -6, scale: 1.06 }}
-                >
-                  {skill.icon}
-                </motion.div>
-                <div className="min-w-0 flex-1">
-                  <p className="mb-1 text-xs font-bold uppercase tracking-wide text-gray-400">
-                    {skill.category}
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wider text-slate-400 mb-0.5">
+                    {skill.category === 'ai' ? 'AI & APIs' : skill.category}
                   </p>
-                  <h3 className="text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-700">
-                    {skill.name}
-                  </h3>
+                  <h3 className="font-semibold text-slate-900">{skill.name}</h3>
                 </div>
-                <div className="flex items-center gap-2 rounded-md bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
-                  <CheckCircle className="h-4 w-4" />
-                  {skill.percentage}%
-                </div>
+                <span className={`rounded-md px-2.5 py-0.5 text-xs font-semibold ${levelColor[skill.level]}`}>
+                  {skill.level}
+                </span>
               </div>
 
-              <div className="mb-3 flex items-center justify-between text-sm font-semibold text-gray-500">
-                <span>Proficiency</span>
-                <span>{skill.percentage >= 90 ? 'Advanced' : skill.percentage >= 75 ? 'Strong' : 'Growing'}</span>
+              {/* Progress bar */}
+              <div>
+                <div className="mb-1.5 flex justify-between text-xs text-slate-400">
+                  <span>Proficiency</span>
+                  <span>{skill.percentage}%</span>
+                </div>
+                <div className="skill-progress">
+                  <motion.div
+                    className="skill-progress-bar"
+                    initial={{ width: 0 }}
+                    animate={inView ? { width: `${skill.percentage}%` } : { width: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: index * 0.04 + 0.2,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  />
+                </div>
               </div>
-              <div className="h-3 overflow-hidden rounded-full bg-slate-100">
-                <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 via-sky-500 to-emerald-400"
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: `${skill.percentage}%` } : { width: 0 }}
-                  transition={{
-                    duration: 0.9,
-                    delay: index * 0.06 + 0.2,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                />
-              </div>
-            </motion.article>
+            </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>

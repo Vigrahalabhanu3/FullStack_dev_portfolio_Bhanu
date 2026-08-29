@@ -2,90 +2,208 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  overflow-x: hidden;
+/* ============================================================
+   BASE
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: theme('colors.slate.800');
+    background-color: #fff;
+    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    outline: 2px solid theme('colors.blue.500');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
 }
 
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 
 .section-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20;
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.display-heading {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  @apply font-bold tracking-tight text-slate-950;
 }
 
 .blue-gradient-text {
-  @apply bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent;
 }
 
+.section-label {
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
 .blue-button {
-  @apply bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  @apply inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60;
 }
 
 .outline-button {
-  @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-50 py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  @apply inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:scale-95;
 }
 
-.card {
-  @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden;
-}
-
-.skill-progress {
-  @apply h-2 rounded-full bg-gray-200 overflow-hidden;
-}
-
-.skill-progress-bar {
-  @apply h-full bg-gradient-to-r from-blue-500 to-blue-700;
-}
-
-.project-card {
-  @apply overflow-hidden rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/50;
-}
-
-.cert-card {
-  @apply overflow-hidden rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-emerald-200/50;
-}
-
-.skill-card {
-  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/50;
-}
-
-.contact-card {
-  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/40;
-}
-
-.about-card {
-  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/40;
-}
-
-.progress-card {
-  @apply rounded-lg border border-gray-100 bg-white shadow-lg shadow-slate-200/60 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-200/40;
-}
-
-.contact-input {
-  @apply w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm transition duration-300 placeholder:text-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500;
-}
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 
 .nav-link {
-  @apply text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+  @apply relative px-3 py-2 text-sm font-medium text-slate-600 rounded-md transition-colors duration-200 hover:text-blue-600;
 }
 
 .nav-link.active {
   @apply text-blue-600 font-semibold;
 }
 
-/* Custom animation classes */
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card {
+  @apply rounded-xl border border-slate-100 bg-white shadow-sm;
 }
+
+.about-card {
+  @apply rounded-xl border border-slate-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md;
+}
+
+.skill-card {
+  @apply rounded-xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-100;
+}
+
+.project-card {
+  @apply overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl hover:shadow-blue-100/50;
+}
+
+.cert-card {
+  @apply overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md hover:border-blue-100;
+}
+
+.contact-card {
+  @apply rounded-xl border border-slate-100 bg-white shadow-sm;
+}
+
+.progress-card {
+  @apply rounded-xl border border-slate-100 bg-white shadow-sm;
+}
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.contact-input {
+  @apply w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm placeholder:text-slate-400 transition-all duration-200 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100;
+}
+
+/* ============================================================
+   PROJECTS TIMELINE
+   ============================================================ */
+
+.project-timeline {
+  position: relative;
+}
+
+.project-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, theme('colors.slate.200') 10%, theme('colors.slate.200') 90%, transparent);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1023px) {
+  .project-timeline::before {
+    left: 20px;
+  }
+}
+
+.project-number {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  @apply text-7xl font-bold text-slate-100 select-none leading-none;
+}
+
+.tech-tag {
+  @apply inline-flex items-center rounded-md border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600;
+}
+
+.feature-item {
+  @apply flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed;
+}
+
+/* ============================================================
+   SKILL PROGRESS
+   ============================================================ */
+
+.skill-progress {
+  @apply h-1.5 w-full overflow-hidden rounded-full bg-slate-100;
+}
+
+.skill-progress-bar {
+  @apply h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -93,22 +211,11 @@ section {
   }
 }
 
-.stagger-item {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.animate-stagger {
+.fade-in-up {
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
-@media (max-width: 767px) {
-  html {
-    scroll-snap-type: none;
-  }
-
-  section {
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
-  }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
 }

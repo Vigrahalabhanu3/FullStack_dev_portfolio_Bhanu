@@ -1,77 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, Twitter } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 
 const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
-};
-
-const buttonMotion = {
-  rest: {
-    y: 0,
-    scale: 1,
-    boxShadow: '0 10px 20px rgba(37, 99, 235, 0.14)',
-  },
-  hover: {
-    y: -5,
-    scale: 1.03,
-    boxShadow: '0 18px 34px rgba(37, 99, 235, 0.26)',
-    transition: { type: 'spring', stiffness: 420, damping: 22 },
-  },
-  tap: {
-    y: -1,
-    scale: 0.97,
-    boxShadow: '0 8px 16px rgba(37, 99, 235, 0.18)',
-    transition: { type: 'spring', stiffness: 520, damping: 24 },
-  },
-};
-
-const outlineButtonMotion = {
-  rest: {
-    y: 0,
-    scale: 1,
-    boxShadow: '0 8px 18px rgba(15, 23, 42, 0.06)',
-  },
-  hover: {
-    y: -5,
-    scale: 1.03,
-    boxShadow: '0 18px 34px rgba(37, 99, 235, 0.16)',
-    transition: { type: 'spring', stiffness: 420, damping: 22 },
-  },
-  tap: {
-    y: -1,
-    scale: 0.97,
-    transition: { type: 'spring', stiffness: 520, damping: 24 },
-  },
-};
-
-const shineMotion = {
-  rest: { x: '-140%', opacity: 0 },
-  hover: {
-    x: '140%',
-    opacity: [0, 0.55, 0],
-    transition: { duration: 0.72, ease: 'easeOut' },
-  },
-};
-
-const iconMotion = {
-  rest: { x: 0, rotate: 0 },
-  hover: { x: 4, rotate: -8, transition: { type: 'spring', stiffness: 500, damping: 18 } },
 };
 
 const socials = [
@@ -86,163 +33,113 @@ const socials = [
     icon: Linkedin,
   },
   {
-    label: 'Twitter',
-    href: 'https://x.com/bhanu7671988410',
-    icon: Twitter,
+    label: 'Email',
+    href: 'mailto:banuvigrahala@gmail.com',
+    icon: Mail,
   },
 ];
 
 const Home: React.FC = () => {
   return (
-    <div className="section-container relative flex min-h-[calc(100vh-8rem)] flex-col items-center justify-center gap-10 overflow-hidden md:min-h-[calc(100vh-10rem)] md:flex-row md:justify-between md:gap-12">
+    <div className="section-container relative flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center gap-12 md:flex-row md:justify-between">
+      {/* Text content */}
       <motion.div
-        className="pointer-events-none absolute left-6 top-24 h-24 w-24 rounded-full border border-blue-100"
-        animate={{ y: [0, -12, 0], scale: [1, 1.05, 1] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="pointer-events-none absolute bottom-16 right-8 h-16 w-16 rounded-md border border-emerald-100"
-        animate={{ y: [0, 10, 0], rotate: [0, 8, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      <motion.div
-        className="relative z-10 md:w-1/2"
+        className="relative z-10 flex-1"
         variants={container}
         initial="hidden"
         animate="visible"
       >
-        <motion.div
+        <motion.p
           variants={fadeUp}
-          className="mb-4 inline-flex items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700"
+          className="section-label mb-5"
         >
-          <Sparkles className="h-4 w-4" />
-          Hello, I'm
-        </motion.div>
+          MERN Stack Developer
+        </motion.p>
 
         <motion.h1
           variants={fadeUp}
-          className="mb-4 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl md:text-5xl lg:text-6xl"
+          className="display-heading mb-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+          style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}
         >
-          Bhanu Prasad Vigrahala
+          Bhanu
+          <br />
+          Prasad Vighrahala
         </motion.h1>
 
-        <motion.h2 variants={fadeUp} className="mb-6 text-xl font-semibold text-gray-700 sm:text-2xl md:text-3xl">
-          Web Developer
-        </motion.h2>
-
-        <motion.p variants={fadeUp} className="mb-8 max-w-xl leading-relaxed text-gray-600">
-          I craft exceptional digital experiences with clean, efficient code.
-          Specializing in creating responsive web applications that deliver
-          both functionality and beauty.
+        <motion.p
+          variants={fadeUp}
+          className="mb-8 max-w-md text-base leading-relaxed text-slate-500 sm:text-lg"
+        >
+          I build full-stack web applications using React, Node.js, Express,
+          and MongoDB — focusing on clean code, real performance, and
+          intuitive user experiences.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mb-8 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
-          <motion.a
+        <motion.div variants={fadeUp} className="mb-8 flex flex-wrap gap-3">
+          <a
             href="#projects"
-            className="blue-button group relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap"
-            variants={buttonMotion}
-            initial="rest"
-            animate="rest"
-            whileHover="hover"
-            whileTap="tap"
+            className="blue-button group"
           >
-            <motion.span
-              className="absolute inset-y-0 -left-10 w-10 rotate-12 bg-white/45 blur-sm"
-              variants={shineMotion}
-            />
-            <span className="relative z-10">View My Work</span>
-            <motion.span className="relative z-10" variants={iconMotion}>
-              <ArrowRight className="h-5 w-5" />
-            </motion.span>
-          </motion.a>
-          <motion.a
+            View Projects
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </a>
+          <a
             href="#contact"
-            className="outline-button group relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap bg-white"
-            variants={outlineButtonMotion}
-            initial="rest"
-            animate="rest"
-            whileHover="hover"
-            whileTap="tap"
+            className="outline-button"
           >
-            <motion.span
-              className="absolute inset-y-0 -left-10 w-10 rotate-12 bg-blue-200/60 blur-sm"
-              variants={shineMotion}
-            />
-            <motion.span className="relative z-10" variants={iconMotion}>
-              <Mail className="h-5 w-5" />
-            </motion.span>
-            <span className="relative z-10">Get in Touch</span>
-          </motion.a>
-          <motion.a
-            href="https://res.cloudinary.com/dzu7g2yts/image/upload/v1785523329/MERN_Stack_Resume_Bhanu_1_v1hdpr.pdf"
-            download="MERN_Stack_Resume_Bhanu.pdf"
-            className="blue-button group relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap"
-            variants={buttonMotion}
-            initial="rest"
-            animate="rest"
-            whileHover="hover"
-            whileTap="tap"
+            Contact Me
+          </a>
+          <a
+            href="https://res.cloudinary.com/dzu7g2yts/image/upload/v1787251011/taskify/ikgdrm4l2hd3tl93svnt.pdf"
+            download="Bhanu_Prasad_Vighrahala_Resume.pdf"
+            className="outline-button"
+            aria-label="Download Resume"
           >
-            <motion.span
-              className="absolute inset-y-0 -left-10 w-10 rotate-12 bg-white/45 blur-sm"
-              variants={shineMotion}
-            />
-            <motion.span className="relative z-10" variants={iconMotion}>
-              <Download className="h-5 w-5" />
-            </motion.span>
-            <span className="relative z-10">Download Resume</span>
-          </motion.a>
+            <Download className="h-4 w-4" />
+            Resume
+          </a>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="flex gap-4">
+        <motion.div variants={fadeUp} className="flex gap-3">
           {socials.map(({ label, href, icon: Icon }) => (
-            <motion.a
+            <a
               key={label}
               href={href}
-              className="flex h-11 w-11 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-600 shadow-sm transition-colors duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-200 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 hover:-translate-y-0.5"
               aria-label={label}
-              whileHover={{ y: -4, rotate: 3 }}
-              whileTap={{ scale: 0.92 }}
             >
-              <Icon className="h-5 w-5" />
-            </motion.a>
+              <Icon className="h-4 w-4" />
+            </a>
           ))}
         </motion.div>
       </motion.div>
 
+      {/* Profile image */}
       <motion.div
-        className="relative z-10 flex justify-center md:w-1/2"
-        initial={{ opacity: 0, scale: 0.92, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.75, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 flex justify-center md:flex-none"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="relative">
-          <motion.div
-            className="absolute -inset-4 rounded-full bg-blue-100/70 blur-2xl"
-            animate={{ scale: [1, 1.08, 1], opacity: [0.7, 0.95, 0.7] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="relative h-56 w-56 overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl shadow-blue-200/60 sm:h-64 sm:w-64 md:h-80 md:w-80"
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-          >
-            <motion.img
+          {/* Subtle background ring */}
+          <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-blue-50 to-slate-100" />
+          {/* Image */}
+          <div className="relative h-64 w-64 overflow-hidden rounded-2xl sm:h-72 sm:w-72 md:h-80 md:w-80">
+            <img
               src="https://res.cloudinary.com/dzu7g2yts/image/upload/v1769582764/53c68e46-6eae-45e6-bf9e-ea7a673a5dbb_tyulyb.jpg"
-              alt="Bhanu Prasad"
+              alt="Bhanu Prasad — MERN Stack Developer"
               className="h-full w-full object-cover"
-              whileHover={{ scale: 1.08 }}
-              transition={{ duration: 0.55 }}
+              loading="eager"
             />
-          </motion.div>
-          <motion.div
-            className="absolute -bottom-4 -right-4 rounded-md bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-200"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            2+ Years Exp.
-          </motion.div>
+          </div>
+          {/* Available badge */}
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-emerald-100 bg-white px-4 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm">
+            <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-emerald-400" style={{ animation: 'pulse-dot 2s ease-in-out infinite' }} />
+            Available for work
+          </div>
         </div>
       </motion.div>
     </div>
