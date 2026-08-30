@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import ResumeButton from '../components/ResumeButton';
 
 const container = {
   hidden: {},
@@ -89,15 +90,7 @@ const Home: React.FC = () => {
           >
             Contact Me
           </a>
-          <a
-            href="https://res.cloudinary.com/dzu7g2yts/image/upload/v1787251011/taskify/ikgdrm4l2hd3tl93svnt.pdf"
-            download="Bhanu_Prasad_Vighrahala_Resume.pdf"
-            className="outline-button"
-            aria-label="Download Resume"
-          >
-            <Download className="h-4 w-4" />
-            Resume
-          </a>
+          <ResumeButton />
         </motion.div>
 
         <motion.div variants={fadeUp} className="flex gap-3">

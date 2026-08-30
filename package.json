@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@lottiefiles/dotlottie-react": "^0.19.16",
     "framer-motion": "^11.0.3",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
