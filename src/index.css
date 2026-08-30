@@ -401,3 +401,92 @@
     transition: none;
   }
 }
+
+/* ============================================================
+   404 NOT FOUND PAGE
+   ============================================================ */
+
+/* Full-viewport centred layout */
+.not-found {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+}
+
+/* Subtle radial blue glow in the background */
+.not-found__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 40%,
+    rgba(59, 130, 246, 0.07) 0%,
+    rgba(99, 102, 241, 0.04) 55%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+/* Content stack */
+.not-found__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  max-width: 480px;
+  width: 100%;
+}
+
+/* Lottie wrapper — responsive */
+.not-found__lottie {
+  width: min(320px, 80vw);
+  height: min(320px, 80vw);
+  flex-shrink: 0;
+}
+
+/* "404" badge */
+.not-found__badge {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #3b82f6;        /* blue-500 */
+  margin: 0.25rem 0 0;
+}
+
+/* "Page Not Found" heading */
+.not-found__heading {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #0f172a;        /* slate-950 */
+  margin: 0.5rem 0 0;
+}
+
+/* Supporting text */
+.not-found__desc {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  line-height: 1.65;
+  color: #64748b;        /* slate-500 */
+  margin: 0.75rem 0 0;
+  max-width: 340px;
+}
+
+/* Button row */
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Layout from './components/Layout';
 import WelcomeScreen from './components/WelcomeScreen';
@@ -8,11 +9,12 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Achievements from './sections/Achievements';
 import Contact from './sections/Contact';
+import NotFound from './pages/NotFound';
 
 const SESSION_KEY = 'bhanu_intro_shown';
 
-function App() {
-  // Show intro only once per browser session
+// ── Portfolio page (with welcome intro) ──────────────────────
+function PortfolioPage() {
   const [showIntro, setShowIntro] = useState<boolean>(
     () => !sessionStorage.getItem(SESSION_KEY)
   );
@@ -20,7 +22,6 @@ function App() {
     () => !!sessionStorage.getItem(SESSION_KEY)
   );
 
-  // Prevent body scroll while the intro is active
   useEffect(() => {
     if (showIntro) {
       document.body.style.overflow = 'hidden';
@@ -34,16 +35,13 @@ function App() {
     sessionStorage.setItem(SESSION_KEY, '1');
     setShowIntro(false);
     setPortfolioVisible(true);
-    // Restore scroll
     document.body.style.overflow = '';
   };
 
   return (
     <>
-      {/* Welcome / Intro screen — shown once per session */}
       {showIntro && <WelcomeScreen onComplete={handleIntroComplete} />}
 
-      {/* Main portfolio — fades in after the intro exits */}
       <motion.div
         key="portfolio"
         initial={portfolioVisible ? false : { opacity: 0 }}
@@ -76,5 +74,16 @@ function App() {
   );
 }
 
-export default App;
+// ── Root App ─────────────────────────────────────────────────
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PortfolioPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
+export default App;
