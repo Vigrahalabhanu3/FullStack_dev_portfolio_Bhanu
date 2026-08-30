@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Layout from './components/Layout';
 import WelcomeScreen from './components/WelcomeScreen';
+import TechMarquee from './components/TechMarquee';
 import Home from './sections/Home';
 import About from './sections/About';
 import Skills from './sections/Skills';
@@ -53,6 +54,7 @@ function PortfolioPage() {
           <section id="home" className="min-h-screen">
             <Home />
           </section>
+          <TechMarquee />
           <section id="about">
             <About />
           </section>

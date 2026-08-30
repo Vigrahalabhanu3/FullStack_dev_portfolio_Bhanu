@@ -490,3 +490,256 @@
   justify-content: center;
   margin-top: 2rem;
 }
+
+/* ============================================================
+   BUILD SHOWCASE — Premium Scrolling Tracks
+   ============================================================ */
+
+/* ── Keyframes (GPU-friendly translate3d) ── */
+
+/* Track 1: right → left. 3 copies → move exactly -33.333% = 1 copy */
+@keyframes bs-scroll-left {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-33.333%, 0, 0); }
+}
+
+/* Track 2: left → right */
+@keyframes bs-scroll-right {
+  from { transform: translate3d(-33.333%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* ── Section shell ── */
+.bs-section {
+  position: relative;
+  overflow: hidden;          /* hard wall — zero horizontal scroll */
+  background: #ffffff;
+  padding: 0;
+}
+
+/* ── Header ── */
+.bs-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3rem max(1.5rem, calc(50vw - 42rem)) 2rem;
+  gap: 0.6rem;
+}
+
+/* "WHAT I BUILD" section label */
+.bs-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #3b82f6;            /* blue-500 — matches portfolio accent */
+  margin: 0;
+}
+
+/* Thin decorative rule under label */
+.bs-rule {
+  width: 2rem;
+  height: 1.5px;
+  background: linear-gradient(to right, #3b82f6, transparent);
+  border-radius: 99px;
+}
+
+/* Subtitle */
+.bs-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.8rem, 2vw, 0.925rem);
+  font-weight: 400;
+  color: #94a3b8;            /* slate-400 */
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── Hairline top / bottom dividers ── */
+.bs-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #e2e8f0 15%,
+    #e2e8f0 85%,
+    transparent 100%
+  );
+}
+
+/* ── Track wrapper ── */
+.bs-track {
+  position: relative;
+  overflow: hidden;
+  padding: 0.9rem 0;
+  cursor: default;
+
+  /* Edge spotlight mask: items fade out at ≈12% from each edge,
+     full opacity in the centre — creates the "cinema" effect */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent   0%,
+    rgba(0,0,0,0.4)  6%,
+    rgba(0,0,0,0.85) 12%,
+    #000           20%,
+    #000           80%,
+    rgba(0,0,0,0.85) 88%,
+    rgba(0,0,0,0.4)  94%,
+    transparent  100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent   0%,
+    rgba(0,0,0,0.4)  6%,
+    rgba(0,0,0,0.85) 12%,
+    #000           20%,
+    #000           80%,
+    rgba(0,0,0,0.85) 88%,
+    rgba(0,0,0,0.4)  94%,
+    transparent  100%
+  );
+}
+
+/* ── Scrolling list (3× duplicated content in JSX) ── */
+.bs-list {
+  display: inline-flex;       /* single row, no wrap */
+  width: max-content;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  will-change: transform;
+  animation-duration: var(--bs-duration, 35s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animationName set via inline style in JSX per direction */
+}
+
+/* ── Individual item ── */
+.bs-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 0.15rem;
+  flex-shrink: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Hover: brighten item when track is paused */
+@media (hover: hover) {
+  .bs-track:hover .bs-item:hover {
+    opacity: 1;
+  }
+  .bs-track:hover .bs-item:not(:hover) {
+    opacity: 0.55;
+  }
+}
+
+/* ── Track 1 item (What I Build) ── */
+.bs-item--build {
+  gap: 0.6rem;
+}
+
+/* Icon wrapper */
+.bs-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: #f1f5f9;       /* slate-100 */
+  border: 1px solid #e2e8f0; /* slate-200 */
+  color: #475569;            /* slate-600 */
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .bs-track:hover .bs-item--build:hover .bs-item__icon {
+    background: #dbeafe;     /* blue-100 */
+    color: #2563eb;          /* blue-600 */
+    border-color: #bfdbfe;   /* blue-200 */
+  }
+}
+
+/* ── Track 2 item (Technologies) ── */
+.bs-item--tech {
+  gap: 0.55rem;
+}
+
+/* Small monogram/symbol badge */
+.bs-item__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-family: 'DM Sans', 'Inter', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #64748b;            /* slate-500 */
+  background: #f8fafc;       /* slate-50 */
+  border: 1px solid #e2e8f0; /* slate-200 */
+  flex-shrink: 0;
+  line-height: 1;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .bs-track:hover .bs-item--tech:hover .bs-item__mark {
+    background: #eff6ff;     /* blue-50 */
+    color: #3b82f6;          /* blue-500 */
+    border-color: #bfdbfe;   /* blue-200 */
+  }
+}
+
+/* ── Label text (shared) ── */
+.bs-item__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #475569;            /* slate-600 */
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .bs-track:hover .bs-item:hover .bs-item__label {
+    color: #2563eb;          /* blue-600 */
+  }
+}
+
+/* ── Separator ── */
+.bs-item__sep {
+  font-size: 0.42rem;
+  color: #cbd5e1;            /* slate-300 */
+  line-height: 1;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ── Reduced motion: freeze all animation, show inline readable list ── */
+@media (prefers-reduced-motion: reduce) {
+  .bs-list {
+    animation: none !important;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .bs-track {
+    overflow-x: hidden;
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding: 0.5rem 0;
+  }
+
+  .bs-item {
+    opacity: 1 !important;
+  }
+}
